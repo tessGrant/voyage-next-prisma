@@ -1,13 +1,6 @@
-import type { Vessel, Voyage } from "@prisma/client";
 import type { NextApiHandler, NextApiResponse } from "next";
+import type { ReturnType } from "../../types";
 import { prisma } from "~/server/db";
-
-export type ReturnType = (Voyage & {
-  vessel: Vessel;
-  _count: {
-    unitTypes: number;
-  };
-})[];
 
 const handler: NextApiHandler = async (_, res: NextApiResponse<ReturnType>) => {
   const voyages = await prisma.voyage.findMany({

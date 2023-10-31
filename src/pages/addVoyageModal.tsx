@@ -16,24 +16,11 @@ import {
   SheetContent,
   SheetTitle,
 } from "~/components/ui/sheet";
+import { type VoyageFormData } from "./types";
 
 interface AddVoyageProps {
-  form: UseFormReturn<
-    {
-      scheduledDeparture: string;
-      scheduledArrival: string;
-      portOfLoading: string;
-      portOfDischarge: string;
-    },
-    null,
-    undefined
-  >;
-  onSubmit: (values: {
-    portOfLoading: string;
-    portOfDischarge: string;
-    scheduledDeparture: string;
-    scheduledArrival: string;
-  }) => void;
+  form: UseFormReturn<VoyageFormData, null, undefined>;
+  onSubmit: (values: VoyageFormData) => void;
 }
 
 export default function AddVoyage({ form, onSubmit }: AddVoyageProps) {

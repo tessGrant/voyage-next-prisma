@@ -1,13 +1,11 @@
 import { PrismaClient, type Vessel, type Voyage } from "@prisma/client";
 import type { NextApiHandler, NextApiResponse, NextApiRequest } from "next";
 
-type ReturnType = Voyage;
-
 const prisma = new PrismaClient();
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<ReturnType>
+  res: NextApiResponse<Voyage>
 ) => {
   if (req.method !== "POST") {
     return res.status(405).end();

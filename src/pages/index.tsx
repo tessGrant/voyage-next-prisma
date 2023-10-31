@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import Head from "next/head";
 import Layout from "~/components/layout";
@@ -11,22 +11,21 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import { fetchData, formSchema } from "~/utils";
-import type { ReturnType } from "./api/voyage/getAll";
 import { Button } from "~/components/ui/button";
 import { TABLE_DATE_FORMAT } from "~/constants";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type Voyage } from "@prisma/client";
 import { type z } from "zod";
 import AddVoyage from "./addVoyageModal";
 import { useDeleteVoyage } from "./hooks/useDeleteVoyage";
 import { useCreateVoyage } from "./hooks/useCreateVoyage";
+import type { ReturnType } from "./types";
 
 export default function Home() {
   const { data: voyages } = useQuery<ReturnType>(["voyages"], () =>
     fetchData("voyage/getAll")
   );
-  const { createVoyage, isError, isSuccess } = useCreateVoyage();
+  const { createVoyage } = useCreateVoyage();
   const { deleteVoyage } = useDeleteVoyage();
 
   const handleDelete = (voyageId: string) => {
