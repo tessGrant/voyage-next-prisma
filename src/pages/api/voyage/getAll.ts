@@ -11,6 +11,7 @@ const handler: NextApiHandler = async (_, res: NextApiResponse<ReturnType>) => {
           unitTypes: true,
         },
       },
+      unitTypes: {},
     },
   });
 

@@ -102,12 +102,12 @@ export default function Home() {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline">
-                        {voyage._count.unitTypes}
+                        {voyage.unitTypes.length}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="z-1000 w-100 rounded-lg bg-gray-600 p-5">
                       <ShowUnitTypesPopOver
-                        unitTypes={voyage._count.unitTypes}
+                        unitTypes={voyage.unitTypes}
                       ></ShowUnitTypesPopOver>
                     </PopoverContent>
                   </Popover>
