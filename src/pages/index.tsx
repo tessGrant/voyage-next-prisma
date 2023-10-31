@@ -20,6 +20,12 @@ import AddVoyage from "./addVoyageModal";
 import { useDeleteVoyage } from "./hooks/useDeleteVoyage";
 import { useCreateVoyage } from "./hooks/useCreateVoyage";
 import type { ReturnType } from "./types";
+import ShowUnitTypesPopOver from "./showUnitTypePop";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@radix-ui/react-popover";
 
 export default function Home() {
   const { data: voyages } = useQuery<ReturnType>(["voyages"], () =>
@@ -65,7 +71,7 @@ export default function Home() {
       </Head>
       <Layout>
         <AddVoyage form={createVoyageForm} onSubmit={onCreateVoyage} />
-        <Table>
+        <Table className="z-99">
           <TableHeader>
             <TableRow>
               <TableHead>Departure</TableHead>
@@ -92,7 +98,20 @@ export default function Home() {
                 <TableCell>{voyage.portOfLoading}</TableCell>
                 <TableCell>{voyage.portOfDischarge}</TableCell>
                 <TableCell>{voyage.vessel.name}</TableCell>
-                <TableCell>{voyage._count.unitTypes}</TableCell>
+                <TableCell>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline">
+                        {voyage._count.unitTypes}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="z-1000 w-100 rounded-lg bg-gray-600 p-5">
+                      <ShowUnitTypesPopOver
+                        unitTypes={voyage._count.unitTypes}
+                      ></ShowUnitTypesPopOver>
+                    </PopoverContent>
+                  </Popover>
+                </TableCell>
                 <TableCell>
                   <Button
                     onClick={() => handleDelete(voyage.id)}
